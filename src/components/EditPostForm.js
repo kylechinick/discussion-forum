@@ -8,9 +8,10 @@ function EditPostForm(props) {
   function handleEditPostFormSubmission(event) {
     event.preventDefault();
     props.onEditPost({
-      names: event.target.names.value,
-      location: event.target.location.value,
-      issue: event.target.issue.value,
+      title: event.target.title.value,
+      url: event.target.url.value,
+      votes: event.target.votes.value,
+      description: event.target.description.value,
       id: post.id
     });
   }

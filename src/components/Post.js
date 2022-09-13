@@ -6,10 +6,11 @@ function Post(props) {
     <React.Fragment>
       <div onClick={() => props.whenPostClicked(props.id)}>
         <h3>
-          {props.location} - {props.names}
+          {props.title} || {props.url}
         </h3>
         <p>
-          <em>{props.issue}</em>
+          <em>description: {props.description}</em><br/>
+          <em>votes: {props.votes}</em>
         </p>
         <hr />
       </div>
@@ -18,9 +19,10 @@ function Post(props) {
 }
 
 Post.propTypes = {
-  names: PropTypes.string,
-  location: PropTypes.string,
-  issue: PropTypes.string,
+  title: PropTypes.string,
+  url: PropTypes.string,
+  votes: PropTypes.number,
+  description: PropTypes.string,
   id: PropTypes.string,
   whenPostClicked: PropTypes.func
 };

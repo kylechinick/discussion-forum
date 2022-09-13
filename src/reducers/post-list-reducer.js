@@ -1,16 +1,17 @@
 const reducer = (state = {}, action) => {
-  const { names, location, issue, id } = action;
+  const { title, url, description, votes, id } = action;
   switch (action.type) {
-    case 'ADD_TICKET':
+    case 'ADD_POST':
       return Object.assign({}, state, {
         [id]: {
-          names: names,
-          location: location,
-          issue: issue,
+          title: title,
+          url: url,
+          description: description,
+          votes: votes,
           id: id
         }
       });
-    case 'DELETE_TICKET':
+    case 'DELETE_POST':
       let newState = { ...state };
       delete newState[id];
       return newState;

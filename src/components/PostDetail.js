@@ -2,19 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function PostDetail(props) {
-  const { post, onClickingDelete, onClickingEdit } = props;
+  const { post, onClickingDelete, onClickingDecrement, onClickingIncrement } = props;
 
   return (
     <React.Fragment>
       <h1>Post Detail</h1>
       <h3>
-        {post.location} - {post.names}
+        {post.title} || {post.url}
       </h3>
       <p>
-        <em>{post.issue}</em>
+        <em>description: {post.description}</em><br />
+        <em>votes: {post.votes}</em>
       </p>
-      <button onClick={onClickingEdit}>Update Post</button>
-      <button onClick={() => onClickingDelete(post.id)}>Close Post</button>
+      <button className='buttonStyle' onClick={ props.onClickingEdit }>Update {post.name} Post</button>
+      <button className='buttonStyle' onClick={() => onClickingDelete(post.id) }>Remove Post</button>
+      <button className='buttonStyle' onClick={() => onClickingIncrement(post.id) }>Updoodle</button>
+      <button className='buttonStyle' onClick={() => onClickingDecrement(post.id) }>Downdoodle</button>
       <hr />
     </React.Fragment>
   );
@@ -23,7 +26,9 @@ function PostDetail(props) {
 PostDetail.propTypes = {
   post: PropTypes.object,
   onClickingDelete: PropTypes.func,
-  onClickingEdit: PropTypes.func
+  onClickingEdit: PropTypes.func,
+  onClickingDecrement: PropTypes.func,
+  onClickingIncrement: PropTypes.func
 };
 
 export default PostDetail;

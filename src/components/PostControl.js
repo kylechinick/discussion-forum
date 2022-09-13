@@ -34,7 +34,7 @@ class PostControl extends React.Component {
   handleDeletingPost = id => {
     const { dispatch } = this.props;
     const action = {
-      type: 'DELETE_TICKET',
+      type: 'DELETE_POST',
       id: id
     };
     dispatch(action);
@@ -49,13 +49,14 @@ class PostControl extends React.Component {
 
   handleEditingPostInList = postToEdit => {
     const { dispatch } = this.props;
-    const { id, names, location, issue } = postToEdit;
+    const { id, title, url, description, votes } = postToEdit;
     const action = {
-      type: 'ADD_TICKET',
+      type: 'ADD_POST',
       id: id,
-      names: names,
-      location: location,
-      issue: issue
+      title: title,
+      url: url,
+      description: description,
+      votes: votes
     };
     dispatch(action);
     this.setState({
@@ -66,13 +67,14 @@ class PostControl extends React.Component {
 
   handleAddingNewPostToList = newPost => {
     const { dispatch } = this.props;
-    const { id, names, location, issue } = newPost;
+    const { id, title, url, description, votes } = newPost;
     const action = {
-      type: 'ADD_TICKET',
+      type: 'ADD_POST',
       id: id,
-      names: names,
-      location: location,
-      issue: issue
+      title: title,
+      url: url,
+      description: description,
+      votes: votes
     };
     dispatch(action);
     const action2 = {
@@ -84,6 +86,30 @@ class PostControl extends React.Component {
   handleChangingSelectedPost = id => {
     const selectedPost = this.props.mainPostList[id];
     this.setState({ selectedPost: selectedPost });
+  };
+
+  handleDecrementingVotes = () => {
+    const votesToDecrement = this.state.selectedPost;
+    if (this.state.selectedPost.quantity !== 0) {
+      const quantityToDecrement = {
+        votes: (votesToDecrement.votes -= 1)
+      };
+      this.handleChangingSelectedPost(quantityToDecrement.id);
+    } else {
+      this.handleChangingSelectedPost(this.state.selectedPost.id);
+    }
+  };
+
+  handleIncrementingVotes = () => {
+    const votesToIncrement = this.state.selectedPost;
+    if (this.state.selectedPost.quantity !== 0) {
+      const quantityToIncrement = {
+        votes: (votesToIncrement.votes += 1)
+      };
+      this.handleChangingSelectedPost(quantityToIncrement.id);
+    } else {
+      this.handleChangingSelectedPost(this.state.selectedPost.id);
+    }
   };
 
   render() {
@@ -103,6 +129,8 @@ class PostControl extends React.Component {
           post={this.state.selectedPost}
           onClickingDelete={this.handleDeletingPost}
           onClickingEdit={this.handleEditClick}
+          onClickingDecrement={this.handleDecrementingVotes}
+          onClickingIncrement={this.handleIncrementingVotes}
         />
       );
       buttonText = 'Return to Post List';
