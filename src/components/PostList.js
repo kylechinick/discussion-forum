@@ -6,6 +6,7 @@ function PostList(props) {
   return (
     <React.Fragment>
       <hr />
+      <h1>All Posts</h1>
 
       {Object.values(props.postList).map(post => (
         <Post

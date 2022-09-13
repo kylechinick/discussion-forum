@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Post(props) {
+
   return (
     <React.Fragment>
       <div onClick={() => props.whenPostClicked(props.id)}>
@@ -24,7 +25,7 @@ Post.propTypes = {
   votes: PropTypes.number,
   description: PropTypes.string,
   id: PropTypes.string,
-  whenPostClicked: PropTypes.func
+  whenPostClicked: PropTypes.func,
 };
 
 export default Post;

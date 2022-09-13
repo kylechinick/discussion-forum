@@ -10,7 +10,7 @@ function EditPostForm(props) {
     props.onEditPost({
       title: event.target.title.value,
       url: event.target.url.value,
-      votes: event.target.votes.value,
+      votes: parseInt(event.target.votes.value),
       description: event.target.description.value,
       id: post.id
     });
