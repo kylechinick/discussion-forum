@@ -1,21 +1,21 @@
 import rootReducer from '../../reducers/index';
 import { createStore } from 'redux';
 import formVisibleReducer from '../../reducers/form-visible-reducer';
-import ticketListReducer from '../../reducers/ticket-list-reducer';
+import postListReducer from '../../reducers/post-list-reducer';
 
 let store = createStore(rootReducer);
 
 describe('rootReducer', () => {
   test('Should return default state if no action type is recognized', () => {
     expect(rootReducer({}, { type: null })).toEqual({
-      mainTicketList: {},
+      mainPostList: {},
       formVisibleOnPage: false
     });
   });
 
-  test('Check that initial state of ticketListReducer matches root reducer', () => {
-    expect(store.getState().mainTicketList).toEqual(
-      ticketListReducer(undefined, { type: null })
+  test('Check that initial state of postListReducer matches root reducer', () => {
+    expect(store.getState().mainPostList).toEqual(
+      postListReducer(undefined, { type: null })
     );
   });
 
@@ -25,7 +25,7 @@ describe('rootReducer', () => {
     );
   });
 
-  test('Check that ADD_TICKET action works for ticketListReducer and root reducer', () => {
+  test('Check that ADD_TICKET action works for postListReducer and root reducer', () => {
     const action = {
       type: 'ADD_TICKET',
       names: 'Ryan & Aimen',
@@ -34,8 +34,8 @@ describe('rootReducer', () => {
       id: 1
     };
     store.dispatch(action);
-    expect(store.getState().mainTicketList).toEqual(
-      ticketListReducer(undefined, action)
+    expect(store.getState().mainPostList).toEqual(
+      postListReducer(undefined, action)
     );
   });
 

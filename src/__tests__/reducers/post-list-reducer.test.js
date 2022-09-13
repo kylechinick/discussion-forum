@@ -1,6 +1,6 @@
-import ticketListReducer from '../../reducers/ticket-list-reducer';
+import postListReducer from '../../reducers/post-list-reducer';
 
-describe('ticketListReducer', () => {
+describe('postListReducer', () => {
   let action;
 
   const currentState = {
@@ -18,7 +18,7 @@ describe('ticketListReducer', () => {
     }
   };
 
-  const ticketData = {
+  const postData = {
     names: 'Ryan & Aimen',
     location: '4b',
     issue: 'Redux action is not working correctly.',
@@ -26,11 +26,11 @@ describe('ticketListReducer', () => {
   };
 
   test('Should return default state if no action type is recognized', () => {
-    expect(ticketListReducer({}, { type: null })).toEqual({});
+    expect(postListReducer({}, { type: null })).toEqual({});
   });
 
-  test('Should successfully add new ticket data to mainTicketList', () => {
-    const { names, location, issue, id } = ticketData;
+  test('Should successfully add new post data to mainPostList', () => {
+    const { names, location, issue, id } = postData;
     action = {
       type: 'ADD_TICKET',
       names: names,
@@ -38,7 +38,7 @@ describe('ticketListReducer', () => {
       issue: issue,
       id: id
     };
-    expect(ticketListReducer({}, action)).toEqual({
+    expect(postListReducer({}, action)).toEqual({
       [id]: {
         names: names,
         location: location,
@@ -48,12 +48,12 @@ describe('ticketListReducer', () => {
     });
   });
 
-  test('Should successfully delete a ticket', () => {
+  test('Should successfully delete a post', () => {
     action = {
       type: 'DELETE_TICKET',
       id: 1
     };
-    expect(ticketListReducer(currentState, action)).toEqual({
+    expect(postListReducer(currentState, action)).toEqual({
       2: {
         names: 'Jasmine and Justine',
         location: '2a',

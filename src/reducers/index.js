@@ -1,10 +1,10 @@
 import formVisibleReducer from './form-visible-reducer';
-import ticketListReducer from './ticket-list-reducer';
+import postListReducer from './post-list-reducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   formVisibleOnPage: formVisibleReducer,
-  mainTicketList: ticketListReducer
+  mainPostList: postListReducer
 });
 
 export default rootReducer;

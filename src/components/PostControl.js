@@ -1,37 +1,37 @@
 import React from 'react';
-import NewTicketForm from './NewTicketForm';
-import TicketList from './TicketList';
-import EditTicketForm from './EditTicketForm';
-import TicketDetail from './TicketDetail';
+import NewPostForm from './NewPostForm';
+import PostList from './PostList';
+import EditPostForm from './EditPostForm';
+import PostDetail from './PostDetail';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class TicketControl extends React.Component {
+class PostControl extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
     this.state = {
-      selectedTicket: null,
+      selectedPost: null,
       editing: false
     };
   }
 
   handleClick = () => {
-    if (this.state.selectedTicket != null) {
+    if (this.state.selectedPost != null) {
       this.setState({
-        selectedTicket: null,
+        selectedPost: null,
         editing: false
       });
     } else {
       const { dispatch } = this.props;
       const action = {
         type: 'TOGGLE_FORM'
-      }
+      };
       dispatch(action);
     }
   };
 
-  handleDeletingTicket = id => {
+  handleDeletingPost = id => {
     const { dispatch } = this.props;
     const action = {
       type: 'DELETE_TICKET',
@@ -39,7 +39,7 @@ class TicketControl extends React.Component {
     };
     dispatch(action);
     this.setState({
-      selectedTicket: null
+      selectedPost: null
     });
   };
 
@@ -47,9 +47,9 @@ class TicketControl extends React.Component {
     this.setState({ editing: true });
   };
 
-  handleEditingTicketInList = ticketToEdit => {
+  handleEditingPostInList = postToEdit => {
     const { dispatch } = this.props;
-    const { id, names, location, issue } = ticketToEdit;
+    const { id, names, location, issue } = postToEdit;
     const action = {
       type: 'ADD_TICKET',
       id: id,
@@ -60,13 +60,13 @@ class TicketControl extends React.Component {
     dispatch(action);
     this.setState({
       editing: false,
-      selectedTicket: null
+      selectedPost: null
     });
   };
 
-  handleAddingNewTicketToList = newTicket => {
+  handleAddingNewPostToList = newPost => {
     const { dispatch } = this.props;
-    const { id, names, location, issue } = newTicket;
+    const { id, names, location, issue } = newPost;
     const action = {
       type: 'ADD_TICKET',
       id: id,
@@ -77,13 +77,13 @@ class TicketControl extends React.Component {
     dispatch(action);
     const action2 = {
       type: 'TOGGLE_FORM'
-    }
+    };
     dispatch(action2);
   };
 
-  handleChangingSelectedTicket = id => {
-    const selectedTicket = this.props.mainTicketList[id];
-    this.setState({ selectedTicket: selectedTicket });
+  handleChangingSelectedPost = id => {
+    const selectedPost = this.props.mainPostList[id];
+    this.setState({ selectedPost: selectedPost });
   };
 
   render() {
@@ -91,34 +91,34 @@ class TicketControl extends React.Component {
     let buttonText = null;
     if (this.state.editing) {
       currentlyVisibleState = (
-        <EditTicketForm
-          ticket={this.state.selectedTicket}
-          onEditTicket={this.handleEditingTicketInList}
+        <EditPostForm
+          post={this.state.selectedPost}
+          onEditPost={this.handleEditingPostInList}
         />
       );
-      buttonText = 'Return to Ticket List';
-    } else if (this.state.selectedTicket != null) {
+      buttonText = 'Return to Post List';
+    } else if (this.state.selectedPost != null) {
       currentlyVisibleState = (
-        <TicketDetail
-          ticket={this.state.selectedTicket}
-          onClickingDelete={this.handleDeletingTicket}
+        <PostDetail
+          post={this.state.selectedPost}
+          onClickingDelete={this.handleDeletingPost}
           onClickingEdit={this.handleEditClick}
         />
       );
-      buttonText = 'Return to Ticket List';
+      buttonText = 'Return to Post List';
     } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = (
-        <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />
+        <NewPostForm onNewPostCreation={this.handleAddingNewPostToList} />
       );
-      buttonText = 'Return to Ticket List';
+      buttonText = 'Return to Post List';
     } else {
       currentlyVisibleState = (
-        <TicketList
-          onTicketSelection={this.handleChangingSelectedTicket}
-          ticketList={this.props.mainTicketList}
+        <PostList
+          onPostSelection={this.handleChangingSelectedPost}
+          postList={this.props.mainPostList}
         />
       );
-      buttonText = 'Add Ticket';
+      buttonText = 'Add Post';
     }
     return (
       <React.Fragment>
@@ -129,18 +129,18 @@ class TicketControl extends React.Component {
   }
 }
 
-TicketControl.propTypes = {
-  mainTicketList: PropTypes.object,
+PostControl.propTypes = {
+  mainPostList: PropTypes.object,
   formVisibleOnPage: PropTypes.bool
 };
 
 const mapStateToProps = state => {
   return {
-    mainTicketList: state.mainTicketList,
+    mainPostList: state.mainPostList,
     formVisibleOnPage: state.formVisibleOnPage
   };
 };
 
-TicketControl = connect(mapStateToProps)(TicketControl);
+PostControl = connect(mapStateToProps)(PostControl);
 
-export default TicketControl;
+export default PostControl;
