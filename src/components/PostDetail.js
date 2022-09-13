@@ -8,7 +8,7 @@ function PostDetail(props) {
     <React.Fragment>
       <h1>Post Detail</h1>
       <h3>
-        {post.title} || {post.url}
+        {post.title} || <a href={post.url} target="_blank" rel="noreferrer">Follow the link</a>
       </h3>
       <p>
         <em>description: {post.description}</em><br />
