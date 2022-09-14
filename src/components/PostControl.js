@@ -112,6 +112,20 @@ class PostControl extends React.Component {
     }
   };
 
+  // handleSettingTimestamp = () => {
+  //   const date = new Date();
+  //   const showTime =
+  //     date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+  //   console.log('Current time: ', showTime);
+
+  //   /* return (
+  //       <div className="timeGetter">
+  //           <h1 align="center">Current Time</h1>
+  //           <h2 align="center"> {showTime}</h2>
+  //       </div>
+  //   );*/
+  // };
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
@@ -136,7 +150,10 @@ class PostControl extends React.Component {
       buttonText = 'Return to Post List';
     } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = (
-        <NewPostForm onNewPostCreation={this.handleAddingNewPostToList} />
+        <NewPostForm
+          onNewPostCreation={this.handleAddingNewPostToList}
+          // setTimestamp={this.handleSettingTimestamp}
+        />
       );
       buttonText = 'Return to Post List';
     } else {

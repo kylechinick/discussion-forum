@@ -12,6 +12,7 @@ function PostList(props) {
         <Post
           whenPostClicked={props.onPostSelection}
           title={post.title}
+          timeStamp={post.timeStamp}
           url={post.url}
           votes={post.votes}
           description={post.description}

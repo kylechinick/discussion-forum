@@ -1,10 +1,11 @@
 const reducer = (state = {}, action) => {
-  const { title, url, description, votes, id } = action;
+  const { title, url, description, votes, id, timeStamp } = action;
   switch (action.type) {
     case 'ADD_POST':
       return Object.assign({}, state, {
         [id]: {
           title: title,
+          timeStamp: timeStamp,
           url: url,
           description: description,
           votes: votes,
