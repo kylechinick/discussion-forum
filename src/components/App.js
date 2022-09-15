@@ -11,7 +11,7 @@ function App() {
         <footer>
           <div className='footer-hr'></div>
 
-          <p>This site was designed and built by THC. Sorta.</p>
+          <p>This site was designed and built by THC - Tena, Hays, & Chinick.</p>
           <p className='micro-font'>Copyright 2022</p>
         </footer>
       </div>

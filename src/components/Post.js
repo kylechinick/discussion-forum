@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatDistanceToNow } from 'date-fns';
 
 function Post(props) {
   function timeSince(props) {
