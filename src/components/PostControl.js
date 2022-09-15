@@ -49,11 +49,12 @@ class PostControl extends React.Component {
 
   handleEditingPostInList = postToEdit => {
     const { dispatch } = this.props;
-    const { id, title, url, description, votes } = postToEdit;
+    const { id, title, timeStamp, url, description, votes } = postToEdit;
     const action = {
       type: 'ADD_POST',
       id: id,
       title: title,
+      timeStamp: timeStamp,
       url: url,
       description: description,
       votes: votes
@@ -67,11 +68,12 @@ class PostControl extends React.Component {
 
   handleAddingNewPostToList = newPost => {
     const { dispatch } = this.props;
-    const { id, title, url, description, votes } = newPost;
+    const { id, title, timeStamp, url, description, votes } = newPost;
     const action = {
       type: 'ADD_POST',
       id: id,
       title: title,
+      timeStamp: timeStamp,
       url: url,
       description: description,
       votes: votes
@@ -150,10 +152,7 @@ class PostControl extends React.Component {
       buttonText = 'Return to Post List';
     } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = (
-        <NewPostForm
-          onNewPostCreation={this.handleAddingNewPostToList}
-          // setTimestamp={this.handleSettingTimestamp}
-        />
+        <NewPostForm onNewPostCreation={this.handleAddingNewPostToList} />
       );
       buttonText = 'Return to Post List';
     } else {
@@ -161,6 +160,8 @@ class PostControl extends React.Component {
         <PostList
           onPostSelection={this.handleChangingSelectedPost}
           postList={this.props.mainPostList}
+          onClickingDecrement={this.handleDecrementingVotes}
+          onClickingIncrement={this.handleIncrementingVotes}
         />
       );
       buttonText = 'Add Post';
@@ -168,7 +169,7 @@ class PostControl extends React.Component {
     return (
       <React.Fragment>
         {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button>
+        <button className='add-new-post' onClick={this.handleClick}>{buttonText}</button>
       </React.Fragment>
     );
   }

@@ -2,20 +2,44 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Post(props) {
+  function timeSince(props) {
+    let currentTime = new Date();
+    let timePassedSinceCreation = currentTime - props.timeStamp;
+    let minutes = Math.floor(timePassedSinceCreation / 60000);
+    let seconds = ((timePassedSinceCreation % 60000) / 1000).toFixed(0);
+    let finalTime =
+      minutes + ' minutes and ' + (seconds < 10 ? '0' : '') + seconds;
+    return finalTime;
+  }
+
   return (
     <React.Fragment>
-      <div onClick={() => props.whenPostClicked(props.id)}>
+      <div className='titleDetail'>
         <h3>
-          {props.title} || {props.url}
-        </h3>
-        <p>{props.timeStamp}</p>
-        <p>
+          <a href={props.url} target='_blank' rel='noreferrer'>
+            {props.title}
+          </a>
+          </h3>
+          <p
+            className='post-data-detail'
+            onClick={() => props.whenPostClicked(props.id)}>
+            (details)
+          </p>
+      </div>
+      <div className='post-data'>
+        <p>Posted: {timeSince(props)} seconds ago</p>
+        <p className='post-data-item'>
           <em>description: {props.description}</em>
-          <br />
+        </p>
+        <p className='post-data-item'>
           <em>votes: {props.votes}</em>
         </p>
-        <hr />
       </div>
+      {/* <button
+        className='buttonStyle'
+        onClick={() => props.whenPostClicked(props.id)}>
+        Details
+      </button> */}
     </React.Fragment>
   );
 }

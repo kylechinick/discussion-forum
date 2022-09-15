@@ -9,12 +9,10 @@ function PostDetail(props) {
     <React.Fragment>
       <h1>Post Detail</h1>
       <h3>
-        {post.title} ||{' '}
-        <a href={post.url} target='_blank' rel='noreferrer'>
-          Follow the link
+        <a href={props.url} target='_blank' rel='noreferrer'>
+          {props.title}
         </a>
       </h3>
-      <p>{post.timeStamp}</p>
       <p>
         <em>description: {post.description}</em>
         <br />
@@ -36,7 +34,6 @@ function PostDetail(props) {
         onClick={() => onClickingDecrement(post.id)}>
         Downdoodle
       </button>
-      <hr />
     </React.Fragment>
   );
 }

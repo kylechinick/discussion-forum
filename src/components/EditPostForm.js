@@ -9,6 +9,7 @@ function EditPostForm(props) {
     event.preventDefault();
     props.onEditPost({
       title: event.target.title.value,
+      timeStamp: post.timeStamp,
       url: event.target.url.value,
       votes: parseInt(event.target.votes.value),
       description: event.target.description.value,

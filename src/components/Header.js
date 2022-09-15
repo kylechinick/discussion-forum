@@ -1,9 +1,15 @@
 import React from 'react';
 
 function Header() {
+  const headerStyle = {
+    backgroundColor: 'rgb(237, 112, 45)',
+    paddingLeft: '.5rem',
+  };
   return (
     <React.Fragment>
-      <h1>Help Queue</h1>
+      <div style={headerStyle}>
+        <h1>DoodleNews</h1>
+      </div>
     </React.Fragment>
   );
 }
